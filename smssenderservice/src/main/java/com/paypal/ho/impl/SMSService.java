@@ -14,7 +14,7 @@ public class SMSService {
     @Autowired
     private SmsSender smsSender;
 
-    private boolean enabled = true;
+    private boolean enabled = false;
 
     @RequestMapping("/send-sms")
     public SMSResponse sendSMS(@RequestBody SMSRequest content) {
@@ -24,7 +24,6 @@ public class SMSService {
         if (enabled) {
             final Message.Status status = smsSender.sendSMS(content);
             response.setStatus(status.name());
-
         }
         return response;
     }
