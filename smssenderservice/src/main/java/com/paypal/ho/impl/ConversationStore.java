@@ -7,4 +7,5 @@ public interface ConversationStore {
     void storeFeedback(String feedbackId, String feedbackContent);
     
     Conversation getConversationByID(String phoneNumber);
+
 }
