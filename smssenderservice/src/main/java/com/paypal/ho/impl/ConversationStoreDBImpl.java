@@ -25,7 +25,7 @@ public class ConversationStoreDBImpl implements ConversationStore {
     }
 
     @Override public Conversation getConversationByID(final String phoneNumber, int scheduleId) {
-        return daoService.queryConversation(phoneNumber);
+        return daoService.queryConversation(phoneNumber, scheduleId);
     }
 
     @Override public Conversation getConversationByID(final String phoneNumber) {

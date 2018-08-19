@@ -38,20 +38,25 @@ public class SMSCallback {
         System.out.println(convo);
         if (convo.getStatus() == 1) {
             if (content.equalsIgnoreCase("y")) {
+                convo.setStatus(2);
                 reply(fromPhoneNumber,
                         "On a scale of 1-5, how happy are you with the meeting? (5 being extremely happy)");
             }
             else {
+                convo.setStatus(4);
                 reply(fromPhoneNumber, "Would you like to reschedule your meeting?");
             }
-            convo.setStatus(2);
             conversationStore.updateConversation(convo);
         }
         else if (convo.getStatus() == 2) {
             storeFeedback(fromPhoneNumber, content);
             convo.setStatus(3);
             conversationStore.updateConversation(convo);
-            reply(fromPhoneNumber, "Thank you!");
+            reply(fromPhoneNumber, "Thank you for the feedback!");
+        }
+        else if (convo.getStatus() == 4) {
+            convo.setStatus(5);
+            reply(fromPhoneNumber, "Thank you, Please reschedule on our website.!");
         }
 
     }

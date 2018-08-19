@@ -12,4 +12,10 @@ public class ConversationFactory {
         //        conversation.setScheduleId(scheduleId++); //FIXME not a thread safe
         return conversation;
     }
+
+    public static Conversation newConversation(int userId, String conversationId,int scheduleId) {
+        Conversation conversation = new Conversation(userId, conversationId, System.currentTimeMillis(), scheduleId);
+        //        conversation.setScheduleId(scheduleId++); //FIXME not a thread safe
+        return conversation;
+    }
 }

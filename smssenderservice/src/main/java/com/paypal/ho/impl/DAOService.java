@@ -129,6 +129,32 @@ public class DAOService {
         return null;
     }
 
+    public Conversation queryConversation(String conversationID, int scheduleId) {
+        // Conversation(int id, int scheduleId, int status, int userId, String convoID)
+        final List<Conversation> rst = jdbcTemplate.query(
+                "SELECT * FROM conversation WHERE convoID = ? and scheduleId = ? ", new Object[] { conversationID, scheduleId },
+                (rs, rowNum) -> new Conversation(rs.getInt("id")
+                        , rs.getInt("scheduleId")
+                        , rs.getInt("status")
+                        , rs.getInt("userId")
+                        , rs.getString("convoID")
+                        , rs.getLong("createTime")
+                        , rs.getLong("lastUpdateTime"))
+        );
+        Collections.sort(rst, new Comparator<Conversation>() {
+            @Override public int compare(final Conversation o1, final Conversation o2) {
+                return o2.getScheduleId() - o1.getScheduleId();
+            }
+        });
+
+        if (rst != null && !rst.isEmpty()) {
+            System.out.println("conversation returned " + rst.get(0));
+            return rst.get(0);
+        }
+
+        return null;
+    }
+
     public boolean updateConversaton(Conversation conversation) {
         System.out.println("update conversation " + conversation.toString());
         int rst = jdbcTemplate.update(
