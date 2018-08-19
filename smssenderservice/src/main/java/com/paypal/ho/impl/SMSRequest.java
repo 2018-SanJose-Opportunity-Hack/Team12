@@ -4,6 +4,15 @@ public class SMSRequest {
 
     private String content;
     private String phoneNumber;
+    private int scheduleId;
+
+    public int getScheduleId() {
+        return scheduleId;
+    }
+
+    public void setScheduleId(final int scheduleId) {
+        this.scheduleId = scheduleId;
+    }
 
     public String getContent() {
         return content;
@@ -19,5 +28,13 @@ public class SMSRequest {
 
     public void setPhoneNumber(final String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override public String toString() {
+        return "SMSRequest{" +
+                "content='" + content + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", scheduleId=" + scheduleId +
+                '}';
     }
 }
