@@ -1,0 +1,80 @@
+
+
+create table questions(
+question_ID INT NOT NULL auto_increment,
+question_text varchar(500),
+for_mentor varchar(1),
+priority numeric(1),
+is_active bool,
+primary key(question_ID)
+);
+
+DROP table questions;
+
+select * from questions;
+
+insert into questions values (0,"test question? ",'t',1);
+
+select * from questions where question_ID = 2;
+
+
+select for_mentor from questions where question_ID = 3;
+
+
+
+
+create table user(
+user_id INT NOT NULL auto_increment,
+username varchar(30),
+email_id varchar(50),
+phone_no varchar(15),
+is_mentor bool,
+primary key(user_id)
+);
+
+insert into user values(0,"user1","something@xyz.com","1243241334",True);
+
+
+create table Meetings(
+meeting_id INT NOT NULL auto_increment,
+Advisor varchar(30),
+Advisor_Phone varchar(15),
+Advisor_Email varchar(30),
+SBO varchar(30),
+SBO_Phone varchar(15),
+SBO_email varchar(30),
+interview_date datetime,
+Advisor_Initiates bool,
+primary key(meeting_id)
+);
+
+
+create table survey(
+survey_id INT NOT NULL auto_increment,
+meeting_id INT,
+customer_id INT,
+unique_id varchar(20) unique,
+is_filled bool,
+filled_at datetime,
+FOREIGN KEY (meeting_id)
+       references Meetings(meeting_id)
+       ON DELETE CASCADE,
+FOREIGN KEY (customer_id)
+       references user(user_id)
+       ON DELETE CASCADE,
+primary key (survey_id)
+);
+
+
+create table survey_response (
+survey_id int,
+question_id int,
+response varchar(1000),
+time_filled datetime,
+FOREIGN KEY (survey_id)
+       references survey(survey_id)
+       ON DELETE CASCADE,
+FOREIGN KEY (question_id)
+       references questions(question_ID)
+       ON DELETE CASCADE
+}

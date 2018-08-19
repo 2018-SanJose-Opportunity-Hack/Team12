@@ -4,9 +4,7 @@ import datetime
 import time
 import matplotlib.pyplot as plt
 
-def parseFile(fileName):
-    print(fileName)
-    data = pd.read_excel("PayPalHackTestFile.xlsx")
+def parseFile():
 
     conn = mysql.connector.connect(
         host='192.168.86.16',
@@ -31,3 +29,4 @@ def parseFile(fileName):
 
     records = cursor.fetchall()
     print(records)
+parseFile()
