@@ -1,0 +1,44 @@
+.btnplus {
+    background-color: #428BCA;
+    color: white;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    margin-top: 20px;
+    font-size: 22px;
+    border: none;
+    text-align: center;
+    padding-bottom: 2px;
+}
+
+.itemHolder {
+    display: flex;
+    width: 70%;
+    margin-left: auto;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.editContainer {
+    margin: 10px;
+    padding: 10px;
+    font-size: 22px;
+    width: 550px;
+    text-align: left;
+}
+
+.sep {
+    background-color: #A9A9A9;
+    height: 1px;
+    margin-top: 20px;
+    border-radius: 20%;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.dropDown {
+    height: 25px;
+    margin-top: 20px;
+    background-color:#428BCA;
+    color: white;
+}

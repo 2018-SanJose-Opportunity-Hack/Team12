@@ -1,0 +1,73 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #428BCA;
+  height: 60px;
+  padding: 20px;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.lblHeader {
+  font-size: 22px;
+  font-weight: bold;
+  margin-right: 500px;
+}
+
+.sep {
+  background-color: #A9A9A9;
+  height: 1px;
+  margin-top: 20px;
+  border-radius: 20%;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-bottom: 50px;
+}
+
+.btnplus {
+  background-color: #428BCA;
+  color: white;
+  border-radius: 40%;
+  width: 25px;
+  height: 25px;
+  margin-top: 20px;
+  font-size: 22px;
+  border: none;
+  text-align: center;
+  padding-bottom: 2px;
+  margin-right: 100px;
+}
+
+.txtInput {
+  margin-left: 20px;
+  width: 550px;
+  height: 20px;
+}
+
+.inputContainer {
+  margin-top: 10px; 
+}
+
+input[type=text] {
+  border:             1px solid #DDDDDD;
+  margin:             5px 1px 3px 0px;
+  outline:            none;
+  padding:            3px 0px 3px 3px;
+  -webkit-transition: all 0.30s ease-in-out;
+     -moz-transition: all 0.30s ease-in-out;
+      -ms-transition: all 0.30s ease-in-out;
+       -o-transition: all 0.30s ease-in-out;
+}
+
+input[type=text]:focus, textarea:focus {
+  border:             1px solid rgba(81, 203, 238, 1);
+  box-shadow:         0 0 5px rgba(81, 203, 238, 1);
+  margin:             5px 1px 3px 0px;
+  padding:            3px 0px 3px 3px;
+}
