@@ -8,6 +8,7 @@
 <body>
   <article>
   <form id = "questionForm">
+    <div class="hiddenClass"><p>{{hashID}}</p></div>
   <div class="question">
     <p>How many hours have you spent with your Advisor this month?</p>
     <input></input>
@@ -46,6 +47,7 @@
 </article>
 
 <script>
+var hashID = "<%= hashID %>";
 var currentTab = 0;
 showTab(currentTab);
 console.log(currentTab);
