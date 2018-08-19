@@ -31,14 +31,34 @@ public class SMSCallback {
         System.out.println("sms call back: " + body);
         Map<String, String> respMap = parseResp(body);
         String content = respMap.get(BODY);
-        String fromPhoneNumber = respMap.get(FROM);
-        reply(fromPhoneNumber, "Thank you!");
+        String fromPhoneNumber = normalizePhoneNumber(respMap.get(FROM));
+        Conversation convo = ConversationStoreMemoryImpl.getInstance().getConversationByID(fromPhoneNumber);
+        if (convo.getStatus() == 1) {
+        	if (content.equalsIgnoreCase("y")) {
+            	reply(fromPhoneNumber, "On a scale of 1-5, how happy are you with the meeting? (5 being extremely happy)");
+            }
+            else {
+            	reply(fromPhoneNumber, "Would you like to reschedule your meeting?");
+            }
+        	convo.setStatus(2);
+        } else if (convo.getStatus() == 2) {
+        	storeFeedback(fromPhoneNumber, content);
+        	reply(fromPhoneNumber, "Thank you!");
+        }
+        
     }
 
-    private void reply(String fromPhoneNumber, String content) {
+    private void storeFeedback(String fromPhoneNumber, String body2) {
+		ConversationStoreMemoryImpl.getInstance().storeFeedback(fromPhoneNumber, body2);
+		
+	}
+
+	private void reply(String fromPhoneNumber, String content) {
         SMSRequest smsRequest = new SMSRequest();
-        smsRequest.setPhoneNumber(normalizePhoneNumber(fromPhoneNumber));
+        smsRequest.setPhoneNumber(fromPhoneNumber);
         smsRequest.setContent(content);
+        System.out.println(smsRequest.getPhoneNumber());
+        System.out.println(smsRequest.getContent());
         smsService.sendSMS(smsRequest);
     }
 
