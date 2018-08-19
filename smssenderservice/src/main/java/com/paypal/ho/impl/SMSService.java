@@ -29,10 +29,10 @@ public class SMSService {
         SMSResponse response = new SMSResponse();
         response.setStatus("success");
         final Conversation conversation = conversationStore
-                .getConversationByID(content.getPhoneNumber());
+                .getConversationByID(content.getPhoneNumber(), content.getScheduleId());
         if (conversation == null) {
             conversationStore.add(ConversationFactory.newConversation(1, content
-                    .getPhoneNumber()));
+                    .getPhoneNumber(), content.getScheduleId()));
         }
         if (enabled) {
             final Message.Status status = smsSender.sendSMS(content);
