@@ -14,6 +14,10 @@ public class SMSService {
     @Autowired
     private SmsSender smsSender;
 
+
+    @Autowired
+    private DAOService daoService;
+
     private boolean enabled = false;
 
     @RequestMapping("/send-sms")
