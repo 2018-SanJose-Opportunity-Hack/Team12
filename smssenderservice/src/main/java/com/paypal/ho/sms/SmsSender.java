@@ -28,18 +28,4 @@ public class SmsSender {
 
         return message.getStatus();
     }
-
-    //    public static void main(String[] args) {
-    //        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-    //
-    //        Message message = Message
-    //                .creator(new PhoneNumber("+16692462510"), // to
-    //                        new PhoneNumber("+18317038841"), // from
-    //                        "test send a SMS ... ")
-    //                .create();
-    //
-    //        message.getStatus();
-    //
-    //        System.out.println(message.getSid());
-    //    }
 }

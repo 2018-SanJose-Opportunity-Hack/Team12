@@ -1,5 +1,6 @@
 package com.paypal.ho.impl;
 
+import com.paypal.ho.dao.Conversation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,8 @@ public class SMSCallback {
     private static final String BODY = "Body";
 
     private static final String FROM = "From";
-
+    @Autowired
+    ConversationStore conversationStore;
     @Autowired
     private SMSService smsService;
 
@@ -32,28 +34,38 @@ public class SMSCallback {
         Map<String, String> respMap = parseResp(body);
         String content = respMap.get(BODY);
         String fromPhoneNumber = normalizePhoneNumber(respMap.get(FROM));
-        Conversation convo = ConversationStoreMemoryImpl.getInstance().getConversationByID(fromPhoneNumber);
+        Conversation convo = conversationStore.getConversationByID(fromPhoneNumber);
+        System.out.println(convo);
         if (convo.getStatus() == 1) {
-        	if (content.equalsIgnoreCase("y")) {
-            	reply(fromPhoneNumber, "On a scale of 1-5, how happy are you with the meeting? (5 being extremely happy)");
+            if (content.equalsIgnoreCase("y")) {
+                convo.setStatus(2);
+                reply(fromPhoneNumber,
+                        "On a scale of 1-5, how happy are you with the meeting? (5 being extremely happy)");
             }
             else {
-            	reply(fromPhoneNumber, "Would you like to reschedule your meeting?");
+                convo.setStatus(4);
+                reply(fromPhoneNumber, "Would you like to reschedule your meeting?");
             }
-        	convo.setStatus(2);
-        } else if (convo.getStatus() == 2) {
-        	storeFeedback(fromPhoneNumber, content);
-        	reply(fromPhoneNumber, "Thank you!");
+            conversationStore.updateConversation(convo);
         }
-        
+        else if (convo.getStatus() == 2) {
+            storeFeedback(fromPhoneNumber, content);
+            convo.setStatus(3);
+            conversationStore.updateConversation(convo);
+            reply(fromPhoneNumber, "Thank you for the feedback!");
+        }
+        else if (convo.getStatus() == 4) {
+            convo.setStatus(5);
+            reply(fromPhoneNumber, "Thank you, Please reschedule on our website.!");
+        }
+
     }
 
-    private void storeFeedback(String fromPhoneNumber, String body2) {
-		ConversationStoreMemoryImpl.getInstance().storeFeedback(fromPhoneNumber, body2);
-		
-	}
+    private void storeFeedback(String fromPhoneNumber, String content) {
+        conversationStore.storeFeedback(fromPhoneNumber, content);
+    }
 
-	private void reply(String fromPhoneNumber, String content) {
+    private void reply(String fromPhoneNumber, String content) {
         SMSRequest smsRequest = new SMSRequest();
         smsRequest.setPhoneNumber(fromPhoneNumber);
         smsRequest.setContent(content);
