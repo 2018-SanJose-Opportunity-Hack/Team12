@@ -1,49 +1,59 @@
 <html>
 <head>
   <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <h1>
   2 Week Survey Checkin Response Survey
 </h1>
 <body>
-  <article>
-  <form id = "questionForm">
+  <article id="article">
     <div class="hiddenClass"><p>{{hashID}}</p></div>
+<form id = "questionForm0">
   <div class="question">
     <p>How many hours have you spent with your Advisor this month?</p>
-    <input></input>
+    <input type="text" name="hours"></input>
   </div>
+</form>
 
+<form id = "questionForm1">
   <div class="question">
     <p>How are you meeting your Advisor?</p>
-    <textarea></textarea>
+    <textarea placeholder="Write your response here" name="meeting"></textarea>
   </div>
+</form>
 
+<form id = "questionForm2">
   <div class="question">
     <p>How satisfied are you with your match?</p>
-    <textarea></textarea>
+    <textarea placeholder="Write your response here" name="satisfied"></textarea>
   </div>
+</form>
 
+<form id = "questionForm3">
   <div class="question">
     <p>Do you plan to continue meeting with your Advisor?</p>
-    <textarea></textarea>
+    <textarea placeholder="Write your response here" name="continue"></textarea>
   </div>
+</form>
 
+<form id = "questionForm4">
   <div class="question">
     <p>What is a success story you can share with us about your match with your Advisor?</p>
-    <textarea></textarea>
+    <textarea placeholder="Write your response here" name="story"></textarea>
   </div>
+</form>
 
+<form id = "questionForm5">
   <div class="question">
     <p>What else would you like us to know about your experience so far?</p>
-    <textarea></textarea>
+    <textarea placeholder="Write your response here" name="experience"></textarea>
   </div>
-
-  <div class = "nextButton">
-      <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
-  </div>
-
 </form>
+
+<div class = "nextButton">
+    <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+</div>
 </article>
 
 <script>
@@ -53,23 +63,37 @@ showTab(currentTab);
 console.log(currentTab);
 function showTab(n) {
   var x = document.getElementsByClassName("question");
-  x[n].style.display = "block";
-  if (n == (x.length - 1)) {
-    document.getElementById("nextBtn").innerHTML = "Submit";
-  } else {
-    document.getElementById("nextBtn").innerHTML = "Next";
+  if(n < x.length){
+    x[n].style.display = "block";
+    if (n == (x.length - 1)) {
+      document.getElementById("nextBtn").innerHTML = "Submit";
+    } else {
+      document.getElementById("nextBtn").innerHTML = "Next";
+    }
   }
 }
 
 function nextPrev(n) {
   var x = document.getElementsByClassName("question");
-  x[currentTab].style.display = "none";
-  currentTab = currentTab + n;
-  if (currentTab >= x.length) {
-    document.getElementById("questionForm").submit();
-    return false;
+  var z =  document.getElementsByClassName("nextButton");
+  var y =  document.getElementById("questionForm" + currentTab);
+  if(currentTab < x.length){
+    x[currentTab].style.display = "none";
+    currentTab = currentTab + n;
+    showTab(currentTab);
   }
-  showTab(currentTab);
+  if(currentTab == (x.length))
+  {
+    z[0].style.display = "none";
+    var div = document.createElement("div");
+    div.style.color = "white";
+    div.innerHTML = "Thank you!";
+    div.style.margin = "0 auto";
+    div.style["text-align"] = "center";
+    div.style.font = "60px times, sans-serif";
+
+    document.getElementById("article").appendChild(div);
+  }
 }
 
 </script>
