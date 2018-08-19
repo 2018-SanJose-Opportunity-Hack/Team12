@@ -1,0 +1,78 @@
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+<h1>
+  2 Week Survey Checkin Response Survey
+</h1>
+<body>
+
+  <article>
+  <form id = "questionForm">
+    <div class="hiddenClass"><p>{{hashID}}</p></div>
+  <div class="question">
+    <p>How many hours have you spent with your Advisor this month?</p>
+    <input></input>
+  </div>
+
+  <div class="question">
+    <p>How are you meeting your Advisor?</p>
+    <textarea></textarea>
+  </div>
+
+  <div class="question">
+    <p>How satisfied are you with your match?</p>
+    <textarea></textarea>
+  </div>
+
+  <div class="question">
+    <p>Do you plan to continue meeting with your Advisor?</p>
+    <textarea></textarea>
+  </div>
+
+  <div class="question">
+    <p>What is a success story you can share with us about your match with your Advisor?</p>
+    <textarea></textarea>
+  </div>
+
+  <div class="question">
+    <p>What else would you like us to know about your experience so far?</p>
+    <textarea></textarea>
+  </div>
+
+  <div class = "nextButton">
+      <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+  </div>
+
+</form>
+</article>
+
+<script>
+var hashID = "<%= hashID %>";
+var currentTab = 0;
+showTab(currentTab);
+console.log(currentTab);
+function showTab(n) {
+  var x = document.getElementsByClassName("question");
+  x[n].style.display = "block";
+  if (n == (x.length - 1)) {
+    document.getElementById("nextBtn").innerHTML = "Submit";
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Next";
+  }
+}
+
+function nextPrev(n) {
+  var x = document.getElementsByClassName("question");
+  x[currentTab].style.display = "none";
+  currentTab = currentTab + n;
+  if (currentTab >= x.length) {
+    document.getElementById("questionForm").submit();
+    return false;
+  }
+  showTab(currentTab);
+}
+
+</script>
+</body>
+</html>
