@@ -1,18 +1,14 @@
-create table feedback_question (
-	id int NOT NULL AUTO_INCREMENT,
-	int type,
-	content varchar(1000)
-); # realtime feedback question
+create table questions(
+question_ID INT NOT NULL auto_increment,
+question_text varchar(500),
+for_mentor varchar(1),
+priority numeric(1),
+primary key(question_ID);
 
 create table sms_template (
 	id int
 	content varchar(1000)
-)
-
-create table survey_question (
-	id int,
-	content varchar(1000)
-)
+);
 
 create table user (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
