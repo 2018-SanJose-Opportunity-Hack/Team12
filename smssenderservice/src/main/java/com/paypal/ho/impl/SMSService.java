@@ -14,13 +14,17 @@ public class SMSService {
     @Autowired
     private SmsSender smsSender;
 
-    private boolean enabled = false;
+    private boolean enabled = true;
 
     @RequestMapping("/send-sms")
     public SMSResponse sendSMS(@RequestBody SMSRequest content) {
         System.out.println("sms content " + content);
         SMSResponse response = new SMSResponse();
         response.setStatus("success");
+        Conversation conversation = ConversationStoreMemoryImpl.getInstance().getConversationByID(content.getPhoneNumber());
+        if (conversation == null) {
+        	ConversationStoreMemoryImpl.getInstance().add(new Conversation(content.getPhoneNumber()));
+        }
         if (enabled) {
             final Message.Status status = smsSender.sendSMS(content);
             response.setStatus(status.name());
