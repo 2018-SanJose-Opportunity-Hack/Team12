@@ -1,14 +1,16 @@
 body {
-    background-image: linear-gradient(to right,#d9a7c7,#fffcdc);
+    background-image: linear-gradient(to top,#d9a7c7,#fffcdc);
 }
 h1 {
     color: white;
     text-align: center;
-    font: 40px arial, sans-serif;
-    background-image: linear-gradient(to right,#141e30,#243b55);
+    font: 40px helvetica, sans-serif;
+    background-image: linear-gradient(to top,#141e30,#243b55);
     width: 80%;
     padding:10px;
     margin: auto;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
 }
 .question
 {
@@ -21,12 +23,14 @@ article
   box-shadow: 0 0 5px hsl(0, 0%, 50%);
   width: 80%;
   margin:auto;
-  background-color: hsl(0, 0%, 20%);
+  background-color: hsl(10, 20%, 20%);
   padding:10px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 p
 {
-  font: 40px arial, serif;
+  font: 40px helvetica, serif;
   color: white;
 }
 textarea {
@@ -34,6 +38,15 @@ textarea {
     max-height: 100%;
     min-width: 50%;
     min-height: 20%;
+    padding: 0;
+    height: 30px;
+    position: relative;
+    left: 0;
+    outline: none;
+    border: 1px solid #cdcdcd;
+    border-color: rgba(0,0,0,.15);
+    background-color: white;
+    font-size: 16px;
 }
 .nextButton
 {
@@ -51,6 +64,7 @@ button
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+
 }
 
 .hiddenClass

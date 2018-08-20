@@ -65,6 +65,7 @@ function showTab(n) {
 function nextPrev(n) {
   var x = document.getElementsByClassName("question");
   x[currentTab].style.display = "none";
+  x[currentTab].submit();
   currentTab = currentTab + n;
   if (currentTab >= x.length) {
     document.getElementById("questionForm").submit();
